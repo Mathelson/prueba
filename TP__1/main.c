@@ -105,6 +105,17 @@ float restar(float numA,float numB);
 *
 */
 float multiplicar(float numA,float numB);
+/** \brief MUESTTRA LOS RESULTADOS
+ *
+ * \param resResta float
+ * \param resDiv float
+ * \param resMulti float
+ * \param numeroA float
+ * \param factorialA float
+ * \return void
+ *
+ */
+void muestraResultados(float resSuma,float resResta, float resDiv, float resMulti, float numeroA, float factorialA);
 
 int main()
 {
@@ -188,29 +199,10 @@ int main()
                 printf("B = %.2f\n",numeroB);
                 if(flagCalcular)
                 {
-                            printf("\nEl resultado de la suma es %.2f: \n ",resSuma);
-                            printf("\nEl resultado de la resta es es %.2f: \n ",resResta);
-                            if(resDiv == 0.0)
-                            {
-                                printf("\nNo es posible dividir por cero\n\n");
-                            }
-                            else
-                            {
-                                printf("\nEl resultado de la div es %.2f \n ",resDiv);
-                            }
-                            printf("\nEl resultado de la multiplicacion es %.2f \n ",resMulti);
-                            if(numeroA>0)
-                            {
-                                printf("\nEl factorial de (A!) = %.1f es %.1f \n",numeroA,factorialA);
-                            }
-                            else
-                            {
-                              printf("\nPara (A!) = el numero debe ser mayor a 0\n");
-                            }
-
-                                resetFlag(&flagPrimerNumero);
-                                resetFlag(&flagSegundoNumero);
-                            }
+                    muestraResultados(resSuma,resResta,resDiv,resMulti,numeroA,factorialA);
+                    resetFlag(&flagPrimerNumero);
+                    resetFlag(&flagSegundoNumero);
+                }
                 else{
                     printf("NO REALIZO EL CALCULO");
                 }
@@ -383,4 +375,29 @@ float multiplicar(float numA,float numB)
     float resMultiplicar=numA*numB;
     return resMultiplicar;
 
+}
+
+/***************************************************/
+void muestraResultados(float resSuma,float resResta, float resDiv, float resMulti, float numeroA, float factorialA)
+ {
+
+        printf("\nEl resultado de la suma es %.2f: \n ",resSuma);
+        printf("\nEl resultado de la resta es es %.2f: \n ",resResta);
+        if(resDiv == 0.0)
+        {
+            printf("\nNo es posible dividir por cero\n\n");
+        }
+            else
+        {
+            printf("\nEl resultado de la div es %.2f \n ",resDiv);
+        }
+            printf("\nEl resultado de la multiplicacion es %.2f \n ",resMulti);
+        if(numeroA>0)
+        {
+        printf("\nEl factorial de (A!) = %.1f es %.1f \n",numeroA,factorialA);
+        }
+        else
+        {
+        printf("\nPara (A!) = el numero debe ser mayor a 0\n");
+        }
 }
