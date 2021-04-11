@@ -24,7 +24,7 @@ char menu ();
  *
  */
 
-void activarFlag(int* pFlag);//tiro un flag y lo pasa a 1
+int activarFlag(int* pFlag);//tiro un flag y lo pasa a 1
 /** \brief Pone un 0 a el valor de la vandera
  *
  * \param
@@ -36,10 +36,10 @@ void activarFlag(int* pFlag);//tiro un flag y lo pasa a 1
 /** \brief
  *
  * \param pFlag int*
- * \return void
+ * \return
  *
  */
-void resetFlag(int* pFlag);
+int resetFlag(int* pFlag);
 
 /** \brief Retorna el numero Ingresado o de lo contrario muestra un mensaje de Error.
  *
@@ -79,22 +79,15 @@ int main()
         {
 
         case '1':
-
-           // printf("INGRESE EL 1er OPERADOR A = X: ");
-           //     fflush(stdin);
-          //   scanf("%d",&numeroA);
-                numeroA = getInt("INGRESE EL 1er OPERADOR A = X: ");
-                activarFlag(&flagPrimerNumero);
-                system("pause");
-                break;
+            numeroA = getInt("INGRESE EL 1er OPERADOR A = X: ");
+            activarFlag(&flagPrimerNumero);
+            system("pause");
+            break;
         case '2':
 
             if(flagPrimerNumero)
             {
 
-                //printf("INGRESE EL 2do OPERADOR B = Y: ");
-                //fflush(stdin);
-                //scanf("%d",&numeroB);
                 numeroB = getInt("INGRESE EL 2do OPERADOR B = Y: ");
                 system("pause");
                 activarFlag(&flagSegundoNumero);
@@ -113,17 +106,19 @@ int main()
             {
                 printf("No se ingreso ningun numero");
             }
-           else if( flagPrimerNumero && !flagSegundoNumero){
+            else if( flagPrimerNumero && !flagSegundoNumero)
+            {
 
                 printf("\nNo se ingreso el segundo numero\n");
 
-          }
-          else{
+            }
+            else
+            {
                 printf("A = %d\n",numeroA);
                 printf("B = %d\n",numeroB);
                 resetFlag(&flagPrimerNumero);
                 resetFlag(&flagSegundoNumero);
-          }
+            }
 
 
             system("pause");
@@ -154,58 +149,59 @@ int main()
 }
 char menu ()
 {
- char opcion;
- char opcionCorrecta;
+    char opcion;
+    char opcionCorrecta;
 
     system("cls");
     printf("         *** Menu de Opciones ***\n\n");
-    printf("\n{1}- INGRESE 1er NUMERO A = X \n{2} - INGRESAR 2do OPERADOR B = Y \n{3} - MOSTRAR\n{5} - salir\n");
+    printf("\n{1} - INGRESE 1er NUMERO A = X \n{2} - INGRESAR 2do OPERADOR B = Y \n{3} - MOSTRAR\n{5} - SALIR\n");
     printf("\nIngrese opcion: ");
     fflush(stdin);
     scanf("%c", &opcion);
     if(opcion>= '1' && opcion<='5')
     {
-     opcionCorrecta = opcion;
+        opcionCorrecta = opcion;
     }
-    else{
+    else
+    {
         printf("\nopcion invalida");
     }
 
     return opcionCorrecta;
 
 }
-void activarFlag(int* pFlag)
+int activarFlag(int* pFlag)
 {
-    //if(*pFlag != NULL)
-
+    int todoOk = 0;
+    if(pFlag != NULL)
+    {
         *pFlag =1;
+        todoOk=1;
+    }
 
-
-
-
+    return todoOk;
 }
-void resetFlag(int* pFlag)
+int resetFlag(int* pFlag)
 {
-
-
+    int todoOk = 0;
+    if(pFlag != NULL)
+    {
         *pFlag =0;
+        todoOk=1;
+    }
 
-
+    return todoOk;
 }
 
 int getInt(char mensaje[])
 {
     char numero[5];
-    //int N;
-    //int numeroValidado;
     printf("%s\n",mensaje);
     scanf("%s",numero);
     while(validar_numero(numero) == 0)
     {
         printf("Ingrese numeros validos:");
         scanf("%s",numero);
-        //printf("Error. Ingrese solo numeros:");
-        //scanf("%s",numero);
     }
     return atoi(numero);
 }
@@ -213,9 +209,9 @@ int validar_numero(char numero [])
 {
     int i;
     int auxReturn=1;
-    for(i=0; i <strlen(numero); i++)//strlen es la longitud de la cadena que esta entrando
+    for(i=0; i <strlen(numero); i++)
     {
-        if(!(isdigit(numero[i])))//si se encuentra en el rango del 47 al 48 en el c{odigo ascii
+        if(!(isdigit(numero[i])))
         {
             auxReturn=0;
         }
