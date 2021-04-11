@@ -5,7 +5,9 @@
 #include <conio.h>
 #include <math.h>
 
-
+//en el mostrar me tiene que poder mostrar si se hicieron todas las operaciones;
+//se puede decir que no hay ningun resultado para mostrar si SUMA=1
+/**EL 3 ES MOSTRAR, PUEDE SER QUE MOSTRAR NOS DIGA QUE FALTO Y LISTO = INFORMAR RESULTADOS*/
 
 /** \brief Muestra las opciones de un menu
  *
@@ -56,6 +58,24 @@ int getInt(char mensaje[]);
  *
  */
 int validar_numero(char numero []);
+/** \brief Funcion Factorial
+ *
+ * \param n int numero a Factorizar
+ * \return int numero Factorizado
+ *
+ */
+//FALTA VALIDAR QUE SEA MAYOR A 0
+int factorialRec(int n);
+/**
+*\brief Pide 2 numeros al Usuario.
+*\param Si uno de los numeros ingresados es distinto de cero, realiza la divicion.
+*\param realiza la divicion.
+*\return El resultado de la divicion.
+*\param si un numero ingresado es igual a cero.
+*\return Retorna 0.0.
+*/
+//REVISAR QUE EL RETORNO SEA DISTINTO
+float dividir (float numA,float numB);
 
 int main()
 {
@@ -154,7 +174,22 @@ char menu ()
 
     system("cls");
     printf("         *** Menu de Opciones ***\n\n");
-    printf("\n{1} - INGRESE 1er NUMERO A = X \n{2} - INGRESAR 2do OPERADOR B = Y \n{3} - MOSTRAR\n{5} - SALIR\n");
+    printf("\n{1} - INGRESE 1er NUMERO A = X \n{2} - INGRESAR 2do OPERADOR B = Y");
+    printf("\n{3} - CALCULAR TODAS LAS OPERACIONES\n");
+    printf("   a) Calcular la suma (A+B)\n");
+    printf("   b) Calcular la resta (A-B)\n");
+    printf("   c) Calcular la division (A/B)HECHO\n");
+    printf("   d) Calcular la multiplicacion (A*B)\n");
+    printf("   e) Calcular el factorial (A!)\nHECHO");
+    printf("\n{4} - INFORMAR RESULTADOS:\n");
+    printf("   a) El resultado de A+B es: r\n");
+    printf("   b) El resultado de A-B es: r\n");
+    printf("   c) El resultado de A/B es: r o No es posible dividir por cero\n");
+    printf("   d) El resultado de A*B es: r\n");
+    printf("   e) El factorial de A es: r1 y El factorial de B es: r2\n");
+    printf("\n{5} - SALIR\n");
+
+
     printf("\nIngrese opcion: ");
     fflush(stdin);
     scanf("%c", &opcion);
@@ -217,4 +252,28 @@ int validar_numero(char numero [])
         }
     }
     return auxReturn;
+}
+int factorialRec(int n)
+{
+    int fac;
+    if(n==1 || n==0)
+    {
+        fac=1;
+
+    }
+    else{
+        fac = n * factorialRec( n-1);
+        }
+    return fac;
+}
+
+float dividir (float numA,float numB)
+{
+    if(numB!=0){
+        float resDivide=numA/numB;
+        return resDivide;
+        }else{
+
+            return 0.0;
+        }
 }
