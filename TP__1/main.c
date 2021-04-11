@@ -5,9 +5,7 @@
 #include <conio.h>
 #include <math.h>
 
-//en el mostrar me tiene que poder mostrar si se hicieron todas las operaciones;
-//se puede decir que no hay ningun resultado para mostrar si SUMA=1
-/**EL 3 ES MOSTRAR, PUEDE SER QUE MOSTRAR NOS DIGA QUE FALTO Y LISTO = INFORMAR RESULTADOS*/
+
 
 /** \brief Muestra las opciones de un menu
  *
@@ -43,13 +41,20 @@ int activarFlag(int* pFlag);//tiro un flag y lo pasa a 1
  */
 int resetFlag(int* pFlag);
 
-/** \brief Retorna el numero Ingresado o de lo contrario muestra un mensaje de Error.
+/** \brief Retorna el numero Ingresado(tipo Entero) o de lo contrario muestra un mensaje de Error.
  *
  * \param mensaje[] char El mensaje a ser mostrado.
  * \return int retorna el numero solicitado ya validado;
  *
  */
 int getInt(char mensaje[]);
+/** \brief Retorna el numero Ingresado (tipoFlotante) o de lo contrario muestra un mensaje de Error.
+ *
+ * \param mensaje[] char El mensaje a ser mostrado.
+ * \return float retorna el numero solicitado ya validado;
+ *
+ */
+float getFloat(char mensaje[]);
 
 /** \brief Valida que lo que haya ingresado el usuario sea un numero
  *
@@ -68,26 +73,58 @@ int validar_numero(char numero []);
 int factorialRec(int n);
 /**
 *\brief Pide 2 numeros al Usuario.
-*\param Si uno de los numeros ingresados es distinto de cero, realiza la divicion.
-*\param realiza la divicion.
-*\return El resultado de la divicion.
+*\param Si uno de los numeros ingresados es distinto de cero, realiza la división.
+*\param realiza ladivisión.
+*\return El resultado de la división.
 *\param si un numero ingresado es igual a cero.
 *\return Retorna 0.0.
 */
-//REVISAR QUE EL RETORNO SEA DISTINTO
+
 float dividir (float numA,float numB);
+
+/**
+*\brief Pide 2 numeros al Usuario.
+*\param Realiza la suma entre los numeros ingresados.
+*\return El resultado de la suma.
+*
+*/
+float sumar(float numA,float numB);
+
+/**
+*\brief Pide 2 numeros al Usuario.
+*\param Realiza la resta entre los numeros ingresados.
+*\return El resultado de la resta.
+*
+*/
+float restar(float numA,float numB);
+
+/**
+*\brief Pide 2 numeros al Usuario.
+*\param Realiza la multiplicacion entre los numeros ingresados.
+*\return El resultado de la multiplicacion.
+*
+*/
+float multiplicar(float numA,float numB);
 
 int main()
 {
     char seguir ='s';
     char confirma;
 
-    int numeroA;
-    int numeroB;
+    float numeroA;
+    float numeroB;
+    float resSuma;
+    float resResta;
+    float resDiv;
+    float resMulti;
+    float factorialA;
+
     int flagPrimerNumero;
     int flagSegundoNumero;
+    int flagCalcular;
 
 
+    resetFlag(&flagCalcular);
     resetFlag(&flagPrimerNumero);
     resetFlag(&flagSegundoNumero);
 
@@ -99,7 +136,7 @@ int main()
         {
 
         case '1':
-            numeroA = getInt("INGRESE EL 1er OPERADOR A = X: ");
+            numeroA = getFloat("INGRESE EL 1er OPERADOR A = X: ");
             activarFlag(&flagPrimerNumero);
             system("pause");
             break;
@@ -108,7 +145,7 @@ int main()
             if(flagPrimerNumero)
             {
 
-                numeroB = getInt("INGRESE EL 2do OPERADOR B = Y: ");
+                numeroB = getFloat("INGRESE EL 2do OPERADOR B = Y: ");
                 system("pause");
                 activarFlag(&flagSegundoNumero);
                 break;
@@ -121,10 +158,23 @@ int main()
             }
             system("pause");
             break;
-        case '3':
+        case'3':
+            printf("se hicieron los calculos correspondientes\n");
+
+            resSuma=sumar(numeroA,numeroB);
+            resResta=restar(numeroA,numeroB);
+            resDiv=dividir(numeroA,numeroB);
+            resMulti=multiplicar(numeroA,numeroB);
+            factorialA=factorialRec(numeroA);
+
+            activarFlag(&flagCalcular);
+
+            system("pause");
+            break;
+        case '4':
             if(!flagPrimerNumero)
             {
-                printf("No se ingreso ningun numero");
+                printf("\nNo se ingreso ningun numero\n");
             }
             else if( flagPrimerNumero && !flagSegundoNumero)
             {
@@ -134,10 +184,37 @@ int main()
             }
             else
             {
-                printf("A = %d\n",numeroA);
-                printf("B = %d\n",numeroB);
-                resetFlag(&flagPrimerNumero);
-                resetFlag(&flagSegundoNumero);
+                printf("A = %.2f\n",numeroA);
+                printf("B = %.2f\n",numeroB);
+                if(flagCalcular)
+                {
+                            printf("\nEl resultado de la suma es %.2f: \n ",resSuma);
+                            printf("\nEl resultado de la resta es es %.2f: \n ",resResta);
+                            if(resDiv == 0.0)
+                            {
+                                printf("\nNo es posible dividir por cero\n\n");
+                            }
+                            else
+                            {
+                                printf("\nEl resultado de la div es %.2f \n ",resDiv);
+                            }
+                            printf("\nEl resultado de la multiplicacion es %.2f \n ",resMulti);
+                            if(numeroA>0)
+                            {
+                                printf("\nEl factorial de (A!) = %.1f es %.1f \n",numeroA,factorialA);
+                            }
+                            else
+                            {
+                              printf("\nPara (A!) = el numero debe ser mayor a 0\n");
+                            }
+
+                                resetFlag(&flagPrimerNumero);
+                                resetFlag(&flagSegundoNumero);
+                            }
+                else{
+                    printf("NO REALIZO EL CALCULO");
+                }
+
             }
 
 
@@ -240,6 +317,18 @@ int getInt(char mensaje[])
     }
     return atoi(numero);
 }
+float getFloat(char mensaje[])
+{
+    char numero[5];
+    printf("%s\n",mensaje);
+    scanf("%s",numero);
+    while(validar_numero(numero) == 0)
+    {
+        printf("Ingrese numeros validos:");
+        scanf("%s",numero);
+    }
+    return atof(numero);
+}
 int validar_numero(char numero [])
 {
     int i;
@@ -261,19 +350,37 @@ int factorialRec(int n)
         fac=1;
 
     }
-    else{
+    else
+    {
         fac = n * factorialRec( n-1);
-        }
+    }
     return fac;
 }
 
 float dividir (float numA,float numB)
 {
-    if(numB!=0){
+    float auxReturn=0.0;
+    if(numB!=0)
+    {
         float resDivide=numA/numB;
-        return resDivide;
-        }else{
+        auxReturn = resDivide;
+    }
+    return auxReturn;
+}
+float sumar(float numA,float numB)
+{
+    float resSuma=numA+numB;
+    return resSuma;
+}
+float restar(float numA,float numB)
+{
+    float resResta=numA-numB;
+    return resResta;
 
-            return 0.0;
-        }
+}
+float multiplicar(float numA,float numB)
+{
+    float resMultiplicar=numA*numB;
+    return resMultiplicar;
+
 }
