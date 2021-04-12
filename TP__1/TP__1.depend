@@ -7,7 +7,25 @@
 	<conio.h>
 	<math.h>
 
-1618178079 source:c:\users\user\desktop\11-04-21\prueba\tp__1\main.c
+1618187903 source:c:\users\user\desktop\11-04-21\prueba\tp__1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+	<math.h>
+	"libreria.h"
+
+1618188205 c:\users\user\desktop\11-04-21\prueba\tp__1\libreria.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+	<math.h>
+
+1618188529 source:c:\users\user\desktop\11-04-21\prueba\tp__1\libreria.c
+	"libreria.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
