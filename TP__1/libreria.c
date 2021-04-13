@@ -46,25 +46,25 @@ char menu ()
 }
 int activarFlag(int* pFlag)
 {
-    int todoOk = 0;
+    int retorno = 0;
     if(pFlag != NULL)
     {
         *pFlag =1;
-        todoOk=1;
+        retorno=1;
     }
 
-    return todoOk;
+    return retorno;
 }
 int resetFlag(int* pFlag)
 {
-    int todoOk = 0;
+    int retorno = 0;
     if(pFlag != NULL)
     {
         *pFlag =0;
-        todoOk=1;
+        retorno=1;
     }
 
-    return todoOk;
+    return retorno;
 }
 
 int getInt(char mensaje[])

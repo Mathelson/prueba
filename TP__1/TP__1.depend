@@ -33,3 +33,20 @@
 	<conio.h>
 	<math.h>
 
+1618324545 source:c:\users\pc2\desktop\13-04\prueba\tp__1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+	<math.h>
+	"libreria.h"
+
+1618324545 c:\users\pc2\desktop\13-04\prueba\tp__1\libreria.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+	<math.h>
+
